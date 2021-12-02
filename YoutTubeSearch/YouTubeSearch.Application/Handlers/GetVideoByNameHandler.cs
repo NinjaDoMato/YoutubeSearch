@@ -10,24 +10,24 @@ using YouTubeSearch.Core.Repositories;
 
 namespace YouTubeSearch.Application.Handlers
 {
-    public interface IGetVideoByIdHandler
+    public interface IGetVideoNameHandler
     {
-        VideoResponse Handle(GetVideoByIdRequest command);
+        List<VideoResponse> Handle(GetVideoNameRequest command);
     }
 
-    public class GetVideoByIdHandler : IGetVideoByIdHandler
+    public class GetVideoByNameHandler : IGetVideoNameHandler
     {
         IVideoRepository _repository;
 
-        public GetVideoByIdHandler(IVideoRepository repository)
+        public GetVideoByNameHandler(IVideoRepository repository)
         {
             _repository = repository;
         }
-        public VideoResponse Handle(GetVideoByIdRequest command)
+        public List<VideoResponse> Handle(GetVideoNameRequest command)
         {
-            var video = _repository.GetByIdAsync(command.Id).Result;
+            var videos = _repository.GetByName(command.Name);
 
-            return VideoMapper.Mapper.Map<VideoResponse>(video);
+            return VideoMapper.Mapper.Map<List<VideoResponse>>(videos);
         }
     }
 }

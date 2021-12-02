@@ -13,5 +13,10 @@ namespace YouTubeSearch.Infrastructure.Repositories
     public class VideoRepository : Repository<Video>, IVideoRepository
     {
         public VideoRepository(DatabaseContext videoContext) : base(videoContext) { }
+
+        public List<Video> GetByName(string name)
+        {
+            return _videoContext.Video.Where(v => v.Name.ToLower().Contains(name.ToLower())).ToList();
+        }
     }
 }

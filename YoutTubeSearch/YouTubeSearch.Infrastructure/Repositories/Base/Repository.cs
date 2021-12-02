@@ -35,6 +35,7 @@ namespace YouTubeSearch.Infrastructure.Repositories.Base
         {
             return await _videoContext.Set<T>().FindAsync(id);
         }
+
         public Task UpdateAsync(T entity)
         {
             throw new NotImplementedException();
