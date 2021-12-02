@@ -1,7 +1,9 @@
-﻿using System;
+﻿using MediatR;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using YouTubeSearch.Application.Mappers;
 using YouTubeSearch.Application.Requests;
@@ -10,31 +12,28 @@ using YouTubeSearch.Core.Repositories;
 
 namespace YouTubeSearch.Application.Handlers
 {
-    public interface IGetVideoFilteredHandler
+    public class GetVideoFilteredHandler : IRequestHandler<GetVideoFilteredRequest, VideoPaginatedReponse>
     {
-        VideoPaginatedReponse Handle(GetVideoFilteredRequest command);
-    }
-
-    public class GetVideoFilteredHandler : IGetVideoFilteredHandler
-    {
-        IVideoRepository _repository;
-
-        public GetVideoFilteredHandler(IVideoRepository repository)
+        private readonly IVideoRepository _repository;
+        public GetVideoFilteredHandler(IVideoRepository videoRepository)
         {
-            _repository = repository;
+            _repository = videoRepository;
         }
-        public VideoPaginatedReponse Handle(GetVideoFilteredRequest command)
+        public async Task<VideoPaginatedReponse> Handle(GetVideoFilteredRequest request, CancellationToken cancellationToken)
         {
+
+
+
             var videosPaginated = new VideoPaginatedReponse();
 
             var videos = _repository.GetAllAsync().Result;
-            var result = videos.Where(v => v.Name.ToLower().Contains(command.Name));
+            var result = videos.Where(v => v.Name.ToLower().Contains(request.Name));
 
             videosPaginated.Total = result.Count();
-            videosPaginated.Page = command.Page;
-            videosPaginated.PageSize = command.PageSize;
+            videosPaginated.Page = request.Page;
+            videosPaginated.PageSize = request.PageSize;
 
-            result = result.Skip((command.Page - 1) * command.PageSize).Take(command.PageSize).ToList();
+            result = result.Skip((request.Page - 1) * request.PageSize).Take(request.PageSize).ToList();
 
             videosPaginated.Videos = VideoMapper.Mapper.Map<List<VideoResponse>>(result);
 
