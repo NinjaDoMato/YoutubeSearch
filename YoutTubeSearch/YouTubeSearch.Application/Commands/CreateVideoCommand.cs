@@ -8,7 +8,7 @@ using YouTubeSearch.Application.Responses;
 
 namespace YouTubeSearch.Application.Commands
 {
-    public class CreateVideoCommand : IRequest<VideoResponse>
+    public class CreateVideoCommand : IRequest<SearchResponse>
     {
         public string Name { get; set; }
         public string Description { get; set; }

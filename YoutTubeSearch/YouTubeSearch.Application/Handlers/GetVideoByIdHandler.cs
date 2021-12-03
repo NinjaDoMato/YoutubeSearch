@@ -12,7 +12,7 @@ namespace YouTubeSearch.Application.Handlers
 {
     public interface IGetVideoByIdHandler
     {
-        VideoResponse Handle(GetVideoByIdRequest command);
+        SearchResponse Handle(GetVideoByIdRequest command);
     }
 
     public class GetVideoByIdHandler : IGetVideoByIdHandler
@@ -23,11 +23,11 @@ namespace YouTubeSearch.Application.Handlers
         {
             _repository = repository;
         }
-        public VideoResponse Handle(GetVideoByIdRequest command)
+        public SearchResponse Handle(GetVideoByIdRequest command)
         {
             var video = _repository.GetByIdAsync(command.Id).Result;
 
-            return VideoMapper.Mapper.Map<VideoResponse>(video);
+            return VideoMapper.Mapper.Map<SearchResponse>(video);
         }
     }
 }

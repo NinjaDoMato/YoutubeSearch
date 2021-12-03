@@ -10,13 +10,13 @@ using YouTubeSearch.Infrastructure.Repositories.Base;
 
 namespace YouTubeSearch.Infrastructure.Repositories
 {
-    public class VideoRepository : Repository<Video>, IVideoRepository
+    public class ChannelRepository : Repository<Channel>, IChannelRepository
     {
-        public VideoRepository(DatabaseContext videoContext) : base(videoContext) { }
+        public ChannelRepository(DatabaseContext videoContext) : base(videoContext) { }
 
-        public Video GetByName(string name)
+        public Channel GetByName(string name)
         {
-            return _context.Video.FirstOrDefault(v => v.Name == name);
+            return _context.Channel.FirstOrDefault(v => v.Name == name);
         }
     }
 }

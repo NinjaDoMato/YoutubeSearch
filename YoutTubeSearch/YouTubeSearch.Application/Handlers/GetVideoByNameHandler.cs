@@ -12,7 +12,7 @@ namespace YouTubeSearch.Application.Handlers
 {
     public interface IGetVideoNameHandler
     {
-        List<VideoResponse> Handle(GetVideoNameRequest command);
+        List<SearchResponse> Handle(GetVideoNameRequest command);
     }
 
     public class GetVideoByNameHandler : IGetVideoNameHandler
@@ -23,11 +23,11 @@ namespace YouTubeSearch.Application.Handlers
         {
             _repository = repository;
         }
-        public List<VideoResponse> Handle(GetVideoNameRequest command)
+        public List<SearchResponse> Handle(GetVideoNameRequest command)
         {
             var videos = _repository.GetByName(command.Name);
 
-            return VideoMapper.Mapper.Map<List<VideoResponse>>(videos);
+            return VideoMapper.Mapper.Map<List<SearchResponse>>(videos);
         }
     }
 }

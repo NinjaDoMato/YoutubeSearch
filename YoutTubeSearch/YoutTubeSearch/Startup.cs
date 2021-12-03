@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Pomelo.EntityFrameworkCore.MySql;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -14,7 +15,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using YouTubeSearch.Application.Handlers;
 using YouTubeSearch.Core.Repositories;
-using YouTubeSearch.Infrastructure.Data;
+using YouTubeSearch.Infrastructure;
 using YouTubeSearch.Infrastructure.Repositories;
 using YouTubeSearch.Infrastructure.Repositories.Base;
 using YouTubeSearch.Core.Repositories.Base;
@@ -36,8 +37,17 @@ namespace YoutTubeSearch
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddDbContext<DatabaseContext>(m => m.UseNpgsql(Configuration.GetConnectionString("ConnectionString")), ServiceLifetime.Singleton);
-            services.AddSwaggerGen(c => {
+
+            var connection = Configuration["ConexaoMySql:MySqlConnectionString"];
+
+            var serverVersion = new MySqlServerVersion(new Version(8, 0, 27));
+
+            services.AddDbContext<DatabaseContext>(options =>
+                options.UseMySql(connection, serverVersion)
+            );
+
+            services.AddSwaggerGen(c =>
+            {
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Title = "Employee.API",
@@ -49,6 +59,7 @@ namespace YoutTubeSearch
 
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddTransient<IVideoRepository, VideoRepository>();
+            services.AddTransient<IChannelRepository, ChannelRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

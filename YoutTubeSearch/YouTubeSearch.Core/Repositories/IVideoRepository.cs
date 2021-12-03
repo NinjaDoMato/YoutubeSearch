@@ -10,6 +10,6 @@ namespace YouTubeSearch.Core.Repositories
 {
     public interface IVideoRepository : IRepository<Video>
     {
-        public List<Video> GetByName(string name);
+        public Video GetByName(string name);
     }
 }

@@ -5,35 +5,35 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using YouTubeSearch.Core.Repositories.Base;
-using YouTubeSearch.Infrastructure.Data;
+using YouTubeSearch.Infrastructure;
 
 namespace YouTubeSearch.Infrastructure.Repositories.Base
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        protected readonly DatabaseContext _videoContext;
+        protected readonly DatabaseContext _context;
         public Repository(DatabaseContext videoContext)
         {
-            _videoContext = videoContext;
+            _context = videoContext;
         }
         public async Task<T> AddAsync(T entity)
         {
-            await _videoContext.Set<T>().AddAsync(entity);
-            await _videoContext.SaveChangesAsync();
+            await _context.Set<T>().AddAsync(entity);
+            await _context.SaveChangesAsync();
             return entity;
         }
         public async Task DeleteAsync(T entity)
         {
-            _videoContext.Set<T>().Remove(entity);
-            await _videoContext.SaveChangesAsync();
+            _context.Set<T>().Remove(entity);
+            await _context.SaveChangesAsync();
         }
         public async Task<IReadOnlyList<T>> GetAllAsync()
         {
-            return await _videoContext.Set<T>().ToListAsync();
+            return await _context.Set<T>().ToListAsync();
         }
         public async Task<T> GetByIdAsync(long id)
         {
-            return await _videoContext.Set<T>().FindAsync(id);
+            return await _context.Set<T>().FindAsync(id);
         }
 
         public Task UpdateAsync(T entity)

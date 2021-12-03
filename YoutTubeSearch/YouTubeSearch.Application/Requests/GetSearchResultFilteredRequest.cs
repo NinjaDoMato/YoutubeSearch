@@ -5,13 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using YouTubeSearch.Application.Responses;
+using YouTubeSearch.Common.Enum;
 
 namespace YouTubeSearch.Application.Requests
 {
-    public class GetVideoFilteredRequest : IRequest<VideoPaginatedReponse>
+    public class GetSearchResultFilteredRequest : IRequest<SearchPaginatedReponse>
     {
         public string Name { get; set; }
         public int Page { get; set; }
         public int PageSize { get; set; }
+        public TypeEnum? Type { get; set; }
     }
 }

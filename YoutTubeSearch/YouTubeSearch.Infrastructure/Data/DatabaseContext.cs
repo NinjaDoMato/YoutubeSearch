@@ -1,19 +1,20 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using YouTubeSearch.Core.Entities;
 
-namespace YouTubeSearch.Infrastructure.Data
+namespace YouTubeSearch.Infrastructure
 {
     public class DatabaseContext : DbContext
     {
         public DatabaseContext() { }
-        public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { }
+        public DatabaseContext(DbContextOptions options) : base(options)
+        {
 
-        public virtual DbSet<Video> Video { get; set; }
-        public virtual DbSet<Channel> Channel { get; set; }
+        }
+
+
+        public DbSet<Video> Video { get; set; }
+        public DbSet<Channel> Channel { get; set; }
     }
 }

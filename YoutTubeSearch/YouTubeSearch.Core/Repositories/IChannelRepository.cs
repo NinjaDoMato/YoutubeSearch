@@ -10,5 +10,6 @@ namespace YouTubeSearch.Core.Repositories
 {
     public interface IChannelRepository : IRepository<Channel>
     {
+        public Channel GetByName(string name);
     }
 }

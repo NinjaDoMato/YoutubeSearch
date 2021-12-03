@@ -14,7 +14,7 @@ namespace YouTubeSearch.Application.Mappers
     {
         public VideoMappingProfile()
         {
-            CreateMap<Video, VideoResponse>().ReverseMap();
+            CreateMap<Video, SearchResponse>().ReverseMap();
             CreateMap<Video, CreateVideoCommand>().ReverseMap();
         }
     }
