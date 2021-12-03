@@ -1,33 +1,31 @@
-﻿using System;
+﻿using MediatR;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using YouTubeSearch.Application.Mappers;
 using YouTubeSearch.Application.Requests;
 using YouTubeSearch.Application.Responses;
+using YouTubeSearch.Core.Entities;
 using YouTubeSearch.Core.Repositories;
 
 namespace YouTubeSearch.Application.Handlers
 {
-    public interface IGetVideoByIdHandler
+    public class GetVideoByIdHandler : IRequestHandler<GetVideoByIdRequest, VideoResponse>
     {
-        SearchResponse Handle(GetVideoByIdRequest command);
-    }
-
-    public class GetVideoByIdHandler : IGetVideoByIdHandler
-    {
-        IVideoRepository _repository;
-
-        public GetVideoByIdHandler(IVideoRepository repository)
+        private readonly IVideoRepository _videoRepository;
+        public GetVideoByIdHandler(IVideoRepository videoRepository)
         {
-            _repository = repository;
+            _videoRepository = videoRepository;
         }
-        public SearchResponse Handle(GetVideoByIdRequest command)
+        public async Task<VideoResponse> Handle(GetVideoByIdRequest request, CancellationToken cancellationToken)
         {
-            var video = _repository.GetByIdAsync(command.Id).Result;
+            var video = await _videoRepository.GetByIdAsync(request.Id);
 
-            return VideoMapper.Mapper.Map<SearchResponse>(video);
+            return VideoMapper.Mapper.Map<VideoResponse>(video);
         }
     }
+
 }

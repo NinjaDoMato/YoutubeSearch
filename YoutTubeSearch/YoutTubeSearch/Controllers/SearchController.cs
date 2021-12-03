@@ -25,7 +25,7 @@ namespace YoutTubeSearch.API.Controllers
         }
 
         [HttpGet]
-        [Route("Get/")]
+        [Route("Get")]
         public async Task<IActionResult> Get([FromQuery] SearchRequestPaginated filter)
         {
             try

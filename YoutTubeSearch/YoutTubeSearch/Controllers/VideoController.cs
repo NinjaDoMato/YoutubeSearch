@@ -31,7 +31,7 @@ namespace YoutTubeSearch.API.Controllers
         {
             try
             {
-                var result = await _mediator.Send(new GetVideoByIdRequest());
+                var result = await _mediator.Send(new GetVideoByIdRequest { Id = id});
 
                 return Ok(result);
             }
@@ -42,6 +42,5 @@ namespace YoutTubeSearch.API.Controllers
                 return BadRequest(new { Message = msg });
             }
         }
-
     }
 }

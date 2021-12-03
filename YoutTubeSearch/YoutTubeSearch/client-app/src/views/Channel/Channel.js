@@ -3,6 +3,7 @@ import DatePicker from 'vue2-datepicker';
 
 export default {
     data() {
+
         return {
             fields: [
                 {
@@ -108,11 +109,7 @@ export default {
             let url = '/#/';
 
             if(type == 'CHANNEL')
-                url += 'Channel/?id=' + id;
-            else
-                url += 'Video/?id=' + id;
-
-            window.location.href = url;
+                url += 'Channel/' + id
         },
         formatDate(data) {
             let dateTime = new Date(data);

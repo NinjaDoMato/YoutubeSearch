@@ -41,14 +41,17 @@ namespace YouTubeSearch.Application.Handlers
 
                             if (video == null)
                             {
+                                // Get the details of the video
+                                var videoDetails = await YouTubeHelper.GetVideoById(search.Id.VideoId);
+
                                 video = await _videoRepository.AddAsync(new Core.Entities.Video
                                 {
-                                    Name = search.Snippet.Title,
+                                    Name = videoDetails.Items.First().Snippet.Title,
                                     ChannelId = search.Snippet.ChannelId,
                                     DateCreated = DateTime.Now,
-                                    Description = search.Snippet.Description,
+                                    Description = videoDetails.Items.First().Snippet.Description,
                                     PublishDate = search.Snippet.PublishedAt.Value,
-                                    Thumb = search.Snippet.Thumbnails.Medium.Url,
+                                    Thumb = search.Snippet.Thumbnails.High.Url,
                                     YoutubeId = search.Id.VideoId
                                 });
                             }
@@ -56,9 +59,7 @@ namespace YouTubeSearch.Application.Handlers
                             videosPaginated.Results.Add(new SearchResponse
                             {
                                 DateCreated = video.PublishDate,
-                                Description = video.Description,
                                 Id = video.Id,
-                                ImageURL = video.Thumb,
                                 LastUpdate = video.LastUpdated,
                                 Name = video.Name,
                                 YoutubeId = video.YoutubeId,
@@ -78,7 +79,7 @@ namespace YouTubeSearch.Application.Handlers
                                     DateCreated = DateTime.Now,
                                     Description = search.Snippet.Description,
                                     DateUploaded = search.Snippet.PublishedAt.Value,
-                                    Thumbnail = search.Snippet.Thumbnails.Medium.Url,
+                                    Thumbnail = search.Snippet.Thumbnails.High.Url,
                                     YoutubeId = search.Id.ChannelId,
                                 });
                             }
@@ -86,9 +87,7 @@ namespace YouTubeSearch.Application.Handlers
                             videosPaginated.Results.Add(new SearchResponse
                             {
                                 DateCreated = channel.DateUploaded,
-                                Description = channel.Description,
                                 Id = channel.Id,
-                                ImageURL = channel.Thumbnail,
                                 LastUpdate = channel.LastUpdated,
                                 Name = channel.Name,
                                 YoutubeId = channel.YoutubeId,

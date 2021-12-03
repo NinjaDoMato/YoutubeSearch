@@ -570,7 +570,7 @@ p {
                     width: 100%;
                 }
                 button{
-                    background: #415480;
+                    background: $gray !important;
                     border: none;
                     outline: none;
                     -webkit-border-radius: 4px;
@@ -631,7 +631,7 @@ p {
         }
     }
 
-    .box-paginacao {
+    .box-pagination {
         display: flex;
         -webkit-justify-content: flex-end;
         justify-content: flex-end;

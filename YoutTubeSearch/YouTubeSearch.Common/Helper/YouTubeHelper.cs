@@ -38,5 +38,21 @@ namespace YoutTubeSearch.API.Helpers
 
             return searchListResponse;
         }
+
+        public static async Task<VideoListResponse> GetVideoById(string id)
+        {
+            var youtubeService = new YouTubeService(new BaseClientService.Initializer()
+            {
+                ApiKey = "AIzaSyC5_VXAlK0-KnV40-GP9lNx0B1FUk_pXs4"
+            });
+
+            var searchListRequest = youtubeService.Videos.List("snippet");
+            searchListRequest.Id = id;
+
+
+            var searchListResponse = await searchListRequest.ExecuteAsync();
+
+            return searchListResponse;
+        }
     }
 }

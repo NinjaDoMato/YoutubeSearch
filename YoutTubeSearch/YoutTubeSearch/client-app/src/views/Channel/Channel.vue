@@ -3,7 +3,7 @@
     <b-container>
       <b-row class="">
         <div class="header-page mt-5">
-          <h2 class="tit-page">YouTube Searcher</h2>
+          <h5 class="tit-page">YouTube Searcher</h5>
           <p class="txt-page">Welcome to this project</p>
         </div>
       </b-row>
@@ -79,4 +79,4 @@
     </section>
   </div>
 </template>
-<script src="./Home.js"></script>
+<script src="./Channel.js"></script>
