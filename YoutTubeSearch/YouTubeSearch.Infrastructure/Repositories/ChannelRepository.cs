@@ -18,5 +18,15 @@ namespace YouTubeSearch.Infrastructure.Repositories
         {
             return _context.Channel.FirstOrDefault(v => v.Name == name);
         }
+
+        public List<Channel> GetContainsByName(string name)
+        {
+            return _context.Channel.Where(v => v.Name.ToLower().Contains(name.ToLower())).ToList();
+        }
+
+        public Channel GetByYoutubeId(string id)
+        {
+            return _context.Channel.FirstOrDefault(v => v.YoutubeId == id);
+        }
     }
 }

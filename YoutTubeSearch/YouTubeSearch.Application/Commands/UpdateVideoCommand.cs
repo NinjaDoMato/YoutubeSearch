@@ -10,17 +10,15 @@ using YouTubeSearch.Application.Responses;
 
 namespace YouTubeSearch.Application.Commands
 {
-    public class CreateVideoCommand : IRequest<VideoResponse>
+    public class UpdateVideoCommand : IRequest<VideoResponse>
     {
         [Required]
-        public string YoutubeId { get; set; }
+        public long Id { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]
         public string Description { get; set; }
         [Required]
         public string Thumb { get; set; }
-        [Required]
-        public string ChannelId { get; set; }
     }
 }

@@ -22,7 +22,7 @@ export default {
 
             await http.get("/Channel/get/" + this.$route.query.id).then((response) => {
                 this.channel = response.data;
-
+                console.log(response.data)
                 this.$loading(false);
             },
             error => 
@@ -30,6 +30,10 @@ export default {
                 this.$snotify.error(error.response.data.message);
                 this.$loading(false);
             });
+        },
+        back()
+        {
+            window.location.href = "/";
         },
         formatDate(data) {
             let dateTime = new Date(data);

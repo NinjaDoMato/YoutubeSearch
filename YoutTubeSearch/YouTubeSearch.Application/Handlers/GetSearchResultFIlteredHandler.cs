@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using YoutTubeSearch.API.Helpers;
 using YouTubeSearch.Application.Mappers;
-using YouTubeSearch.Application.Requests;
+using YouTubeSearch.Application.Queries;
 using YouTubeSearch.Application.Responses;
 using YouTubeSearch.Core.Repositories;
 
@@ -44,7 +44,7 @@ namespace YouTubeSearch.Application.Handlers
                                 // Get the details of the video to get the complete description
                                 var videoDetails = await YouTubeHelper.GetVideoById(search.Id.VideoId);
 
-                                video = await _videoRepository.AddAsync(new Core.Entities.Video
+                                video = _videoRepository.Add(new Core.Entities.Video
                                 {
                                     Name = videoDetails.Items.First().Snippet.Title,
                                     ChannelId = search.Snippet.ChannelId,
@@ -56,16 +56,6 @@ namespace YouTubeSearch.Application.Handlers
                                 });
                             }
 
-                            videosPaginated.Results.Add(new SearchResponse
-                            {
-                                DateCreated = video.PublishDate,
-                                Id = video.Id,
-                                LastUpdate = video.LastUpdated,
-                                Name = video.Name,
-                                YoutubeId = video.YoutubeId,
-                                Type = "VIDEO"
-                            });
-
                             break;
 
                         case "youtube#channel":
@@ -73,31 +63,60 @@ namespace YouTubeSearch.Application.Handlers
 
                             if (channel == null)
                             {
-                                channel = await _channelRepository.AddAsync(new Core.Entities.Channel
+                                var channelDetails = await YouTubeHelper.GetChannelById(search.Id.ChannelId);
+
+                                channel = _channelRepository.Add(new Core.Entities.Channel
                                 {
                                     Name = search.Snippet.Title,
                                     DateCreated = DateTime.Now,
-                                    Description = search.Snippet.Description,
+                                    Description = channelDetails.Items.First().Snippet.Description,
                                     DateUploaded = search.Snippet.PublishedAt.Value,
                                     Thumbnail = search.Snippet.Thumbnails.High.Url,
                                     YoutubeId = search.Id.ChannelId,
                                 });
                             }
 
-                            videosPaginated.Results.Add(new SearchResponse
-                            {
-                                DateCreated = channel.DateUploaded,
-                                Id = channel.Id,
-                                LastUpdate = channel.LastUpdated,
-                                Name = channel.Name,
-                                YoutubeId = channel.YoutubeId,
-                                Type = "CHANNEL"
-                            });
-
                             break;
                     }
                 }
+            }
 
+            // Gets the data from the database
+            if (!request.Type.HasValue || request.Type.Value == Common.Enum.TypeEnum.Video)
+            {
+                var videos = _videoRepository.GetContainsByName(request.Name);
+
+                foreach (var video in videos)
+                {
+                    videosPaginated.Results.Add(new SearchResponse
+                    {
+                        DateCreated = video.PublishDate,
+                        Id = video.Id,
+                        LastUpdate = video.LastUpdated,
+                        Name = video.Name,
+                        YoutubeId = video.YoutubeId,
+                        Type = "VIDEO"
+                    });
+                }
+            }
+
+            // Gets the data from the database
+            if (!request.Type.HasValue || request.Type.Value == Common.Enum.TypeEnum.Channel)
+            {
+                var channels = _channelRepository.GetContainsByName(request.Name);
+
+                foreach (var channel in channels)
+                {
+                    videosPaginated.Results.Add(new SearchResponse
+                    {
+                        DateCreated = channel.DateCreated,
+                        Id = channel.Id,
+                        LastUpdate = channel.LastUpdated,
+                        Name = channel.Name,
+                        YoutubeId = channel.YoutubeId,
+                        Type = "CHANNEL"
+                    });
+                }
             }
 
             videosPaginated.Total = videosPaginated.Results.Count();

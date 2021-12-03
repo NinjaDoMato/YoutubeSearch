@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="page-eventos page-conteudo">
-            <div class="banner-top">
+            <div class="banner-top-video">
                 <div class="bg-top" :style="'margin: 0px; background: url(' + video.thumb + ') no-repeat center;'">
                 </div>
                 <b-container>
@@ -23,7 +23,7 @@
                                 <p class="box-text"><b>Title:</b> {{video.name}} </p>
                             </div>
                             <div class="">
-                                <p class="box-text"><b>Date Dreated:</b> {{video.publishDate}} </p>
+                                <p class="box-text"><b>Date Created:</b> {{formatDate(video.publishDate)}} </p>
                             </div>
                         </div>
                       </b-col>

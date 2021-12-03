@@ -18,10 +18,10 @@ namespace YoutTubeSearch.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
 
-    public class VideoController : BaseController
+    public class ChannelController : BaseController
     {
         private readonly IMediator _mediator;
-        public VideoController(IMediator mediator)
+        public ChannelController(IMediator mediator)
         {
             _mediator = mediator;
         }
@@ -32,7 +32,7 @@ namespace YoutTubeSearch.API.Controllers
         {
             try
             {
-                var result = await _mediator.Send(new GetAllVideoRequest { Page = request.Page, PageSize = request.PageSize});
+                var result = await _mediator.Send(new GetAllChannelRequest { Page = request.Page, PageSize = request.PageSize });
 
                 return Ok(result);
             }
@@ -50,7 +50,7 @@ namespace YoutTubeSearch.API.Controllers
         {
             try
             {
-                var result = await _mediator.Send(new GetVideoByIdRequest { Id = id });
+                var result = await _mediator.Send(new GetChannelByIdRequest { Id = id});
 
                 return Ok(result);
             }
@@ -64,7 +64,7 @@ namespace YoutTubeSearch.API.Controllers
 
         [HttpPost]
         [Route("Post")]
-        public async Task<IActionResult> Post([FromBody] CreateVideoCommand request)
+        public async Task<IActionResult> Post([FromBody] CreateChannelCommand request)
         {
             try
             {
@@ -82,7 +82,7 @@ namespace YoutTubeSearch.API.Controllers
 
         [HttpPut]
         [Route("Put")]
-        public async Task<IActionResult> Put([FromBody] UpdateVideoCommand request)
+        public async Task<IActionResult> Put([FromBody] UpdateChannelCommand request)
         {
             try
             {
@@ -100,7 +100,7 @@ namespace YoutTubeSearch.API.Controllers
 
         [HttpDelete]
         [Route("Delete")]
-        public async Task<IActionResult> Delete([FromBody] DeleteVideoCommand request)
+        public async Task<IActionResult> Delete([FromBody] DeleteChannelCommand request)
         {
             try
             {

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using YoutTubeSearch.API.Helpers;
 using YoutTubeSearch.API.Models.Requests;
 using YoutTubeSearch.Controllers;
-using YouTubeSearch.Application.Requests;
+using YouTubeSearch.Application.Queries;
 using YouTubeSearch.Application.Responses;
 using YouTubeSearch.Core.Entities;
 

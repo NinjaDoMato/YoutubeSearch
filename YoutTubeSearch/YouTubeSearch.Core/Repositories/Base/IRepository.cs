@@ -10,8 +10,9 @@ namespace YouTubeSearch.Core.Repositories.Base
     {
         Task<IReadOnlyList<T>> GetAllAsync();
         Task<T> GetByIdAsync(long id);
+        T Add(T entity);
         Task<T> AddAsync(T entity);
-        Task UpdateAsync(T entity);
+        T Update(T entity);
         Task DeleteAsync(T entity);
     }
 }

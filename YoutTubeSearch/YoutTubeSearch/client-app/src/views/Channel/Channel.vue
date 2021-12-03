@@ -2,7 +2,7 @@
     <div>
         <div class="page-eventos page-conteudo">
             <div class="banner-top">
-                <div class="bg-top" :style="'margin: 0px; background: url(' + channel.thumb + ') no-repeat center;'">
+                <div class="bg-top" :style="'margin: 0px; background: url(' + channel.thumbnail + ') no-repeat center;'">
                 </div>
                 <b-container>
                     <div class="img-banner">
@@ -23,7 +23,7 @@
                                 <p class="box-text"><b>Title:</b> {{channel.name}} </p>
                             </div>
                             <div class="">
-                                <p class="box-text"><b>Date Dreated:</b> {{channel.publishDate}} </p>
+                                <p class="box-text"><b>Date Created:</b> {{formatDate(channel.dateUploaded)}} </p>
                             </div>
                         </div>
                       </b-col>

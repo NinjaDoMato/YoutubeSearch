@@ -16,9 +16,16 @@ namespace YouTubeSearch.Infrastructure.Repositories.Base
         {
             _context = videoContext;
         }
+        public T Add(T entity)
+        {
+            _context.Set<T>().Add(entity);
+            _context.SaveChanges();
+            return entity;
+        }
+
         public async Task<T> AddAsync(T entity)
         {
-            await _context.Set<T>().AddAsync(entity);
+            _context.Set<T>().Add(entity);
             await _context.SaveChangesAsync();
             return entity;
         }
@@ -36,9 +43,11 @@ namespace YouTubeSearch.Infrastructure.Repositories.Base
             return await _context.Set<T>().FindAsync(id);
         }
 
-        public Task UpdateAsync(T entity)
+        public T Update(T entity)
         {
-            throw new NotImplementedException();
+            _context.Set<T>().Update(entity);
+            _context.SaveChanges();
+            return entity;
         }
     }
 }

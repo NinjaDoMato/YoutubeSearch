@@ -10,7 +10,7 @@ using YouTubeSearch.Application.Responses;
 
 namespace YouTubeSearch.Application.Commands
 {
-    public class CreateVideoCommand : IRequest<VideoResponse>
+    public class CreateChannelCommand : IRequest<ChannelResponse>
     {
         [Required]
         public string YoutubeId { get; set; }
@@ -19,8 +19,6 @@ namespace YouTubeSearch.Application.Commands
         [Required]
         public string Description { get; set; }
         [Required]
-        public string Thumb { get; set; }
-        [Required]
-        public string ChannelId { get; set; }
+        public string Thumbnail { get; set; }
     }
 }

@@ -11,5 +11,8 @@ namespace YouTubeSearch.Core.Repositories
     public interface IChannelRepository : IRepository<Channel>
     {
         public Channel GetByName(string name);
+        public List<Channel> GetContainsByName(string name);
+        public Channel GetByYoutubeId(string id);
+
     }
 }

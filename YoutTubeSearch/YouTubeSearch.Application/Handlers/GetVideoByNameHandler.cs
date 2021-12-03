@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using YouTubeSearch.Application.Mappers;
-using YouTubeSearch.Application.Requests;
+using YouTubeSearch.Application.Queries;
 using YouTubeSearch.Application.Responses;
 using YouTubeSearch.Core.Repositories;
 
