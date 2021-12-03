@@ -15,7 +15,7 @@
           <div class="header-table">
 
             <div class="">
-              <div class="box-filter ml-3 d-flex">
+              <div class="box-filter d-flex">
                 <b-form-group>
                   <b-form-input
                   id="title"

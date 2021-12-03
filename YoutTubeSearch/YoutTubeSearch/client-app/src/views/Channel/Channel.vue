@@ -1,82 +1,53 @@
 <template>
-  <div>
-    <b-container>
-      <b-row class="">
-        <div class="header-page mt-5">
-          <h5 class="tit-page">YouTube Searcher</h5>
-          <p class="txt-page">Welcome to this project</p>
-        </div>
-      </b-row>
-    </b-container>
-
-    <section class="mb-5">
-      <b-container>
-        <div class="div-table">
-          <div class="header-table">
-
-            <div class="">
-              <div class="box-filter ml-3 d-flex">
-                <b-form-group>
-                  <b-form-input
-                  id="title"
-                  v-model="title"
-                  type="text"
-                  required
-                  placeholder="Title"></b-form-input>
-                </b-form-group>
-
-                <b-form-group>
-                  <b-form-select :options="options"
-                                          v-model="type"
-                                          required
-                                          class="w-100 ml-3 input-padrao"></b-form-select>
-                </b-form-group>
-
-                <b-form-group class="ml-3">
-                  <div class="bt-defaults w-100 ml-3">
-                    <button type="button" class="ml-auto" @click="search(true)" variant="primary">Search</button>
-                  </div>
-                </b-form-group>
-              </div>
-            </div>
-          </div>
-
-          <div class="box-tabel">
-            <b-table
-              show-empty
-              small
-              class="table-custom text-center"
-              responsive
-              :items="items"
-              :fields="fields"
-              :sort-by.sync="sortBy"
-              :sort-desc.sync="sortDesc">
-              
-              <template v-slot:cell(dateCreated)="data">
-                  {{ formatDate(data.value) }}
-              </template>
-
-               <template v-slot:cell(actions)="data">
-                <b-button
-                  size="sm"
-                  class="mr"
-                  type="button"
-                  @click="details(data.item.id, data.item.type)"
-                ><font-awesome-icon title="Details" :icon="['fas', 'search-plus']" class="info" /> </b-button>
-              </template>
-            </b-table>
-
-            <div class="box-pagination">
-                <b-pagination v-model="page" :total-rows="total" :per-page="pageSize" class="mr-3"></b-pagination>
-                <div class="form-group mb-0">
-                    <b-select v-model="pageSize" id="perPageSelect" :options="pageOptions" class=""></b-select>
+    <div>
+        <div class="page-eventos page-conteudo">
+            <div class="banner-top">
+                <div class="bg-top" :style="'margin: 0px; background: url(' + channel.thumb + ') no-repeat center;'">
                 </div>
+                <b-container>
+                    <div class="img-banner">
+                        <img v-bind:src="channel.thumbnail" alt="">
+                    </div>
+                </b-container>
             </div>
-          </div>
-        </div>
 
-      </b-container>
-    </section>
-  </div>
+
+            <section class="text-center">
+                <b-container>                    
+                    <h3 class="title"><b>{{channel.name}}</b></h3>
+                    <div class="details">
+                      <b-col class="details-col">
+                        <div class="description">
+
+                            <div class="">
+                                <p class="box-text"><b>Title:</b> {{channel.name}} </p>
+                            </div>
+                            <div class="">
+                                <p class="box-text"><b>Date Dreated:</b> {{channel.publishDate}} </p>
+                            </div>
+                        </div>
+                      </b-col>
+
+                      <b-col class="details-col">
+                        <div class="description mb-5">
+                            <div class="mb-5">
+                                <p class="box-text"> {{channel.description}} </p>                                
+                            </div>
+                            <div class="justify-content-center d-flex">
+                              <div class="bt-defaults ml-3 w-100">
+                                <button type="button" class="ml-auto" @click="back()" variant="primary">Back</button>
+                              </div>
+                            </div>
+                        </div>
+                      </b-col>
+                    
+                    </div>
+                </b-container>     
+            </section>
+
+        </div>
+    </div>
 </template>
+
+<style src="./Channel.scss" lang="scss"></style>
 <script src="./Channel.js"></script>

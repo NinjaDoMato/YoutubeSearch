@@ -41,7 +41,7 @@ namespace YouTubeSearch.Application.Handlers
 
                             if (video == null)
                             {
-                                // Get the details of the video
+                                // Get the details of the video to get the complete description
                                 var videoDetails = await YouTubeHelper.GetVideoById(search.Id.VideoId);
 
                                 video = await _videoRepository.AddAsync(new Core.Entities.Video

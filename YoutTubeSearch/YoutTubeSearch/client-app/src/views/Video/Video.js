@@ -31,6 +31,10 @@ export default {
                 this.$loading(false);
             });
         },
+        back()
+        {
+            window.location.href = "/";
+        },
         formatDate(data) {
             let dateTime = new Date(data);
             return dateTime.toLocaleDateString() + ' ' + dateTime.toLocaleTimeString();

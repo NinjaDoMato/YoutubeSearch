@@ -12,21 +12,39 @@
             </div>
 
 
-            <section class="evento-selecionado">
-                <b-container>
+            <section class="text-center">
+                <b-container>                    
                     <h3 class="title"><b>{{video.name}}</b></h3>
-                    <div class="info-eventos">
-                        <div class="justify-content-center">
-                            <div class="description">
+                    <div class="details">
+                      <b-col class="details-col">
+                        <div class="description">
 
-                                <div class="mb-5">
-                                    <p class="box-text"> {{video.description}} </p>
-                                </div>
+                            <div class="">
+                                <p class="box-text"><b>Title:</b> {{video.name}} </p>
+                            </div>
+                            <div class="">
+                                <p class="box-text"><b>Date Dreated:</b> {{video.publishDate}} </p>
                             </div>
                         </div>
+                      </b-col>
+
+                      <b-col class="details-col">
+                        <div class="description mb-5">
+                            <div class="mb-5">
+                                <p class="box-text"> {{video.description}} </p>                                
+                            </div>
+                            <div class="justify-content-center d-flex">
+                              <div class="bt-defaults ml-3 w-100">
+                                <button type="button" class="ml-auto" @click="back()" variant="primary">Back</button>
+                              </div>
+                            </div>
+                        </div>
+                      </b-col>
+                    
                     </div>
-                </b-container>
+                </b-container>     
             </section>
+
         </div>
     </div>
 </template>
