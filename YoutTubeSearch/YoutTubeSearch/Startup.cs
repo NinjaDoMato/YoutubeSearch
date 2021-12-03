@@ -21,6 +21,9 @@ using YouTubeSearch.Infrastructure.Repositories.Base;
 using YouTubeSearch.Core.Repositories.Base;
 using System.Reflection;
 using MediatR;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using YoutTubeSearch.API.Helpers;
 
 namespace YoutTubeSearch
 {
@@ -36,7 +39,13 @@ namespace YoutTubeSearch
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            //services.AddControllers();
+            services.AddSpaStaticFiles(options => options.RootPath = "client-app/dist");
+
+            services.AddMvc(options =>
+            {
+                options.EnableEndpointRouting = false;
+            });
 
             var connection = Configuration["ConexaoMySql:MySqlConnectionString"];
 
@@ -76,11 +85,24 @@ namespace YoutTubeSearch
 
             app.UseRouting();
 
+            app.UseStaticFiles();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            app.UseCors("AllowMyOrigin");
+            app.UseMvc();
+            app.UseSpaStaticFiles();
+            app.UseSpa(spa =>
+            {
+                spa.Options.SourcePath = "client-app";
+
+                if (env.IsDevelopment())
+                    spa.UseVueDevelopmentServer();
             });
         }
     }

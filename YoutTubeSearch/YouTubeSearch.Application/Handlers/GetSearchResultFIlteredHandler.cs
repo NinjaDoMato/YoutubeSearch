@@ -30,7 +30,7 @@ namespace YouTubeSearch.Application.Handlers
             var youtubeResult = await YouTubeHelper.Search(request.Name, request.Type.HasValue ? request.Type.Value.ToString() : string.Empty);
 
             // Adds the result to the database
-            foreach (var search in youtubeResult)
+            foreach (var search in youtubeResult.Items)
             {
                 if (!videosPaginated.Results.Any(s => s.Name == search.Snippet.Title))
                 {

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="150" height="149.98" viewBox="0 0 150 149.98">
+  <g id="play-button" transform="translate(0 -0.002)">
+    <path id="Caminho_1" data-name="Caminho 1" d="M49.659,33.118,18.512,10.477a3.756,3.756,0,0,0-5.965,3.03V58.775A3.744,3.744,0,0,0,14.6,62.124a3.783,3.783,0,0,0,1.707.4,3.733,3.733,0,0,0,2.206-.729L49.659,39.178a3.726,3.726,0,0,0,0-6.06Z" transform="translate(50.082 38.941)" fill="#fff"/>
+    <path id="Caminho_2" data-name="Caminho 2" d="M75,0a74.99,74.99,0,1,0,75,75A74.994,74.994,0,0,0,75,0Zm0,137.466A62.474,62.474,0,1,1,137.466,75,62.465,62.465,0,0,1,75,137.468Z" transform="translate(0 0)" fill="#fff"/>
+  </g>
+</svg>

@@ -16,7 +16,7 @@ namespace YoutTubeSearch.API.Helpers
 {
     public static class YouTubeHelper
     {
-        public static async Task<IList<SearchResult>> Search(string name, string type)
+        public static async Task<SearchListResponse> Search(string name, string type, int pageSize = 500)
         {
             var youtubeService = new YouTubeService(new BaseClientService.Initializer()
             {
@@ -31,9 +31,12 @@ namespace YoutTubeSearch.API.Helpers
                 searchListRequest.Type = type;
             }
 
+            searchListRequest.MaxResults = pageSize;
+            searchListRequest.Order = SearchResource.ListRequest.OrderEnum.Relevance;
+
             var searchListResponse = await searchListRequest.ExecuteAsync();
 
-            return searchListResponse.Items;
+            return searchListResponse;
         }
     }
 }
