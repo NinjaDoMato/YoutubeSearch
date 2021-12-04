@@ -16,7 +16,7 @@ namespace YoutTubeSearch.API.Helpers
 {
     public static class YouTubeHelper
     {
-        private static string _apiKey = "AIzaSyDamjOWLsmUVxZnMBy4dzrt106axuoA0-I";
+        private static string _apiKey = "AIzaSyDbkq2OVlfnm82XageI5U8On_9gHHVhCtg";
         public static async Task<SearchListResponse> Search(string name, string type, int pageSize = 500)
         {
             var youtubeService = new YouTubeService(new BaseClientService.Initializer()

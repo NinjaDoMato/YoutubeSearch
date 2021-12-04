@@ -39,7 +39,7 @@ namespace YoutTubeSearch
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddControllers();
+            services.AddControllers();
             services.AddSpaStaticFiles(options => options.RootPath = "client-app/dist");
 
             services.AddMvc(options =>
@@ -94,8 +94,6 @@ namespace YoutTubeSearch
                 endpoints.MapControllers();
             });
 
-            app.UseCors("AllowMyOrigin");
-            app.UseMvc();
             app.UseSpaStaticFiles();
             app.UseSpa(spa =>
             {
